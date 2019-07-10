@@ -1,25 +1,37 @@
 <template>
-    <header class="row">
-        <nav class="navbar navbar-toggleable-md navbar-light">
-            <a class="navbar-brand" href="/">PIZZA PLANET</a>
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="">home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">menu</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+  <header class="row">
+    <nav class="navbar navbar-toggleable-md navbar-light">
+      <a class="navbar-brand" href="/">PIZZA PLANET</a>
+      <ul class="nav">
+        <router-link :to="homeLink" tag="li">
+          <a class="nav-link">home</a>
+        </router-link>
+        <router-link :to="menuLink" tag="li">
+          <a class="nav-link">menu</a>
+        </router-link>
+      </ul>
+    </nav>
+  </header>
 </template>
 
+<script>
+export default {
+    data(){
+        return{
+            homeLink: '/',
+            menuLink: '/menu',
+        }
+    }
+}
+</script>
+
+
 <style>
-    header{
-        margin-bottom: 20px;
-    }
-    .navbar-brand{
-        font-size: 1.5em;
-    }
+header {
+  margin-bottom: 20px;
+}
+.navbar-brand {
+  font-size: 1.5em;
+}
 </style>
 
