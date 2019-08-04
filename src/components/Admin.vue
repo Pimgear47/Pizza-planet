@@ -51,22 +51,39 @@
         </tbody>
       </table>
     </div>
-    <hr>
+    <hr />
     <div class="row">
-        <div class="col-sm-12 col-lg-6">
-            <pp-login></pp-login>
-        </div>
+      <div class="col-sm-12 col-lg-6">
+        <pp-login></pp-login>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import NewPizza from './NewPizza'
-import Login from './Login'
+import NewPizza from "./NewPizza";
+import Login from "./Login";
 export default {
-    components:{
-        ppNewPizza: NewPizza,
-        ppLogin: Login
+  components: {
+    ppNewPizza: NewPizza,
+    ppLogin: Login
+  },
+  data() {
+    return {
+      // name: "Pim"
+    };
+  },
+  // beforeRouteEnter: (to, from, next) => {
+  //   next(vm => {
+  //     alert("Hello " + vm.name);
+  //   });
+  // }
+  beforeRouteLeave (to, from, next) {
+    if(confirm('Have you remembered to log out')==true){
+      next();
+    }else{
+      next(false);
     }
+  }
 };
 </script>

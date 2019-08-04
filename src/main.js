@@ -17,33 +17,45 @@ Vue.use(VueRouter)
 
 const routes = [{
         path: '/',
+        name: 'homeLink',
         component: Home
     },
     {
         path: '/menu',
+        name: 'menuLink',
         component: Menu
     },
     {
         path: '/admin',
-        component: Admin
+        name: 'adminLink',
+        component: Admin,
+        beforeEnter: (to, from, next) => {
+            alert('This area is for authorised user only, please login to countinue.')
+            next();
+        }
     },
     {
         path: '/about',
+        name: 'aboutLink',
         component: About,
         children: [{
                 path: '/contact',
+                name: 'contactLink',
                 component: Contact
             },
             {
                 path: '/history',
+                name: 'historyLink',
                 component: History
             },
             {
                 path: '/delivery',
+                name: 'deliveryLink',
                 component: Delivery
             },
             {
                 path: '/ordering-guide',
+                name: 'orderingGuideLink',
                 component: OrderingGuide
             },
         ]
@@ -56,8 +68,35 @@ const routes = [{
 
 const router = new VueRouter({
     routes,
-    mode: 'history'
+    mode: 'history',
+    // scrollBehavior(to, from, savedPosition) {
+    //     return { x: 0, y: 200 }
+    // }
+    scrollBehavior(to, from, savedPosition) {
+        // if (savedPosition) {
+        //     return savedPosition
+        // } else {
+        //     return { x: 0, y: 0 }
+        // }
+        if (to.hash) {
+            return {
+                selector: to.hash
+            }
+        }
+    }
 })
+
+// router.beforeEach((to, from, next) => {
+//     if (to.path == '/menu') {
+//         next()
+//     } else {
+//         next(false)
+//     }
+// })
+
+// router.afterEach((to, from) => {
+//     alert('After each')
+// })
 
 new Vue({
     el: '#app',

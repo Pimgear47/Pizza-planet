@@ -3,16 +3,16 @@
     <p>Click on the links below for more info:</p>
     <nav class="navbar navbar-toggleable-md navbar-light">
       <ul class="nav">
-        <router-link :to="historyLink" tag="li">
+        <router-link :to="{name : 'historyLink'}" tag="li">
           <a class="nav-link">Our history</a>
         </router-link>
-        <router-link :to="contactLink" tag="li">
+        <router-link :to="{name : 'contactLink'}" tag="li">
           <a class="nav-link">Contact us</a>
         </router-link>
-        <router-link :to="orderingGuideLink" tag="li">
+        <router-link :to="{name : 'orderingGuideLink'}" tag="li">
           <a class="nav-link">Ordering guide</a>
         </router-link>
-        <router-link :to="deliveryLink" tag="li">
+        <router-link :to="{name : 'deliveryLink'}" tag="li">
           <a class="nav-link">Delivery</a>
         </router-link>
       </ul>
@@ -24,13 +24,8 @@
 
 <script>
 export default {
-    data(){
-        return{
-            historyLink: '/history',
-            contactLink: '/contact',
-            orderingGuideLink: '/ordering-guide',
-            deliveryLink: '/delivery'
-        }
-    }
-}
+  data() {
+    return {};
+  }
+};
 </script>
