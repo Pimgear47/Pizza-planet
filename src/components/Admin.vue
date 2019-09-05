@@ -13,9 +13,9 @@
               <th>Remove from menu</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody v-for="item in getMenuItems">
             <tr>
-              <td>Margherita</td>
+              <td>{{item.name}}</td>
               <td>
                 <button class="btn btn-sm btn-outline-danger">x</button>
               </td>
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="col-sm-12">
-      <h3>Current orders:</h3>
+      <h3>Current orders: {{numberOfOrders}}</h3>
       <table class="table">
         <thead class="thead-default">
           <tr>
@@ -73,15 +73,24 @@ export default {
       // name: "Pim"
     };
   },
+  computed: {
+    getMenuItems() {
+      // return this.$store.state.menuItems;
+      return this.$store.getters.getMenuItems;
+    },
+    numberOfOrders(){
+      return this.$store.getters.numberOfOrders;
+    }
+  },
   // beforeRouteEnter: (to, from, next) => {
   //   next(vm => {
   //     alert("Hello " + vm.name);
   //   });
   // }
-  beforeRouteLeave (to, from, next) {
-    if(confirm('Have you remembered to log out')==true){
+  beforeRouteLeave(to, from, next) {
+    if (confirm("Have you remembered to log out") == true) {
       next();
-    }else{
+    } else {
       next(false);
     }
   }
