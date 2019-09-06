@@ -63,6 +63,7 @@
 <script>
 import NewPizza from "./NewPizza";
 import Login from "./Login";
+import {mapGetters} from 'vuex'
 export default {
   components: {
     ppNewPizza: NewPizza,
@@ -74,13 +75,16 @@ export default {
     };
   },
   computed: {
-    getMenuItems() {
-      // return this.$store.state.menuItems;
-      return this.$store.getters.getMenuItems;
-    },
-    numberOfOrders(){
-      return this.$store.getters.numberOfOrders;
-    }
+    // getMenuItems() {
+    //   // return this.$store.state.menuItems;
+    //   return this.$store.getters.getMenuItems;
+    // },
+    // numberOfOrders(){
+    //   return this.$store.getters.numberOfOrders;
+    // }
+    ...mapGetters ([ // ใช้ตัวนี้แทน getters ทั้งหมด
+      'getMenuItems','numberOfOrders','currentUser'
+    ])
   },
   // beforeRouteEnter: (to, from, next) => {
   //   next(vm => {

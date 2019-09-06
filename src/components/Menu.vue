@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
   data() {
     return {
@@ -73,9 +74,12 @@ export default {
     };
   },
   computed: {
-    getMenuItems() {
-      return this.$store.getters.getMenuItems;
-    }
+    // getMenuItems() {
+    //   return this.$store.getters.getMenuItems;
+    // }
+      ...mapGetters ([ // ใช้ตัวนี้แทน getters ทั้งหมด
+      'getMenuItems'
+    ])
   },
   methods: {
     addToBasket(item, option) {
@@ -99,7 +103,7 @@ export default {
       }
     },
     addNewOrder() {
-      this.$store.commit("addOrder", this.basket);
+      this.$store.commit("addOrder", this.basket); //เรียก commit mutation ที่ชื่อ addOrder แล้วส่ง this.basket ไป
       this.basket = [];
       this.basketText = "Thank you, your order has been placed :D";
     }
