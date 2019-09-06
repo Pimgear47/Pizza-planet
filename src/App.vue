@@ -28,17 +28,19 @@
 </template>
 
 <script>
-import Header from './components/Header'
-import Footer from './components/Footer'
-
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import { dbMenuRef } from "./firebaseConfig";
 export default {
   components: {
     ppHeader: Header,
-    ppFooter: Footer,
-  }
-}
+    ppFooter: Footer, 
+  },
+  created() {
+      this.$store.dispatch("setMenuRef", dbMenuRef)
+    }
+};
 </script>
 
 <style>
-
 </style>

@@ -9,7 +9,8 @@ var firebaseConfig = {
     messagingSenderId: "247598498235",
     appId: "1:247598498235:web:5af69fa1a4c17c5b"
 };
-// Initialize Firebase
+
 const firebaseApp = Firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.database()
-export const dbMenuRef = db.ref('menu'); //Use in 'menu' database
+export const dbMenuRef = db.ref('menu')
+export const dbOrdersRef = db.ref('orders')
