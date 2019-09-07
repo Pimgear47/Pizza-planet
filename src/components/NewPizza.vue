@@ -73,7 +73,7 @@ export default {
   },
   methods:{
       addMenuItem(){
-          dbMenuRef.push(this.newPizza);
+          dbMenuRef.push(this.newPizza); //เพิ่มเมนูใหม่เข้า db firebase
       }
   }
 };

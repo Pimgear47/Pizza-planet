@@ -9,7 +9,7 @@
             <th>Add to basket</th>
           </tr>
         </thead>
-        <tbody v-for="item in getMenuItems" :key="item.name">
+        <tbody v-for="item in getMenuItems" :key="item['.key']">
           <tr>
             <td>
               <strong>{{item.name}}</strong>
@@ -17,7 +17,7 @@
           </tr>
           <tr v-for="option in item.options" :key="option.price">
             <td>{{option.size}}</td>
-            <td>{{option.price}}</td>
+            <td>{{option.price | currency}}</td>
             <td>
               <button
                 class="btn btn-sm btn-outline-success"
@@ -49,23 +49,23 @@
                 <button class="btn btn-sm" type="button" @click="increaseQuantity(item)">+</button>
               </td>
               <td>{{item.name}} {{item.size}}"</td>
-              <td>{{item.price * item.quantity}}</td>
+              <td>{{item.price * item.quantity | currency}}</td>
             </tr>
           </tbody>
         </table>
-        <p>Order total:</p>
+        <p>Order total: {{total | currency}}</p>
         <button class="btn btn-success btn-block" @click="addNewOrder">Place order</button>
       </div>
       <div v-else>
         <p>{{basketText}}</p>
-        {{this.$store.state.orders}}
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import { mapGetters } from "vuex";
+import { dbMenuRef, dbOrdersRef } from "../firebaseConfig";
 export default {
   data() {
     return {
@@ -77,9 +77,18 @@ export default {
     // getMenuItems() {
     //   return this.$store.getters.getMenuItems;
     // }
-      ...mapGetters ([ // ใช้ตัวนี้แทน getters ทั้งหมด
-      'getMenuItems'
-    ])
+    ...mapGetters([
+      // ใช้ตัวนี้แทน getters ทั้งหมด
+      "getMenuItems"
+    ]),
+    total(){
+      var totalCost = 0
+      for(var items in this.basket){
+        var individualItems = this.basket[items]
+        totalCost += individualItems.price*individualItems.quantity
+      }
+      return totalCost
+    }
   },
   methods: {
     addToBasket(item, option) {
@@ -103,7 +112,8 @@ export default {
       }
     },
     addNewOrder() {
-      this.$store.commit("addOrder", this.basket); //เรียก commit mutation ที่ชื่อ addOrder แล้วส่ง this.basket ไป
+      // this.$store.commit("addOrder", this.basket); //เรียก commit mutation ที่ชื่อ addOrder แล้วส่ง this.basket ไป
+      dbOrdersRef.push(this.basket);
       this.basket = [];
       this.basketText = "Thank you, your order has been placed :D";
     }

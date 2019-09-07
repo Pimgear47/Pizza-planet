@@ -1,9 +1,12 @@
+import { firebaseAction } from 'vuexfire'
+
 const state = {
     orders: [],
 }
 
 const getters = {
-
+    getOrders: state => state.orders,
+    numberOfOrders: state => state.orders.length
 }
 
 const mutations = {
@@ -11,7 +14,9 @@ const mutations = {
 }
 
 const actions = {
-
+    setOrdersRef: firebaseAction(({ bindFirebaseRef }, { ref }) => { //ผูกข้อมูล
+        bindFirebaseRef('orders', ref)
+    })
 }
 
 export default {
