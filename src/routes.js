@@ -1,7 +1,17 @@
 import Home from './components/Home'
-import Menu from './components/Menu'
-import About from './components/About'
-import Admin from './components/Admin'
+
+// import Menu from './components/Menu'
+const Menu = () =>
+    import ('./components/Menu')
+
+// import About from './components/About'
+const About = () =>
+    import ('./components/About')
+
+// import Admin from './components/Admin'
+const Admin = () =>
+    import ('./components/Admin')
+
 import Contact from './components/Contact'
 import History from './components/History'
 import Delivery from './components/Delivery'

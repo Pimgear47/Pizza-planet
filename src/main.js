@@ -43,6 +43,7 @@ Vue.filter('currency', function(val) {
     return Accounting.formatMoney(val)
 })
 
+
 new Vue({
     el: '#app',
     router,
